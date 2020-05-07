@@ -16,8 +16,10 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".blue.bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
         puts ""
+        puts "------------------------------MENU--------------------------------".blue.bold
         puts "To see a current list of the Top 60 Best Coding Bootcamps, type list!".bold
         puts "To leave, type exit."
+        puts ""
     end
 
     def list_bootcamps
@@ -39,8 +41,10 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
     def menu
         puts ""
-        puts "Select the ranking number of a Bootcamp you wish to learn more about!".blue.bold
+        puts "------------------------------MENU--------------------------------".blue.bold
+        puts "Select another Bootcamp you wish to learn more about!".blue.bold
         puts "To leave, type exit"
+        puts ""
         input = gets.strip
 
         if input.to_i > 0
@@ -55,17 +59,19 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts ""
             puts "About The Bootcamp: ".bold + bootcamp_choice.info
             puts ""
-            puts "Most Recent Review: ".bold + bootcamp_choice.review
-            puts "------------------------------------------------------------------"
+            puts "Want to learn more? Check out the link below for more information on YOUR Bootcamp!".bold
+            puts "#{bootcamp_choice.url_link}"
             menu
         elsif
             input == "exit"
+            puts ""
+            puts "------------------------------GOODBYE!-------------------------------".blue.bold
             puts ""
             puts "Thank you for choosing the Course Report Bootcamp App!!".bold
             puts ""
             puts ""
         else
-            puts "ERROR: Please try again"
+            puts "ERROR: Please type a number to see another Bootcamp or type 'exit' to leave"
             menu
         end
     end
