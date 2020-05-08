@@ -3,6 +3,8 @@ require 'open-uri'
 require 'pry'
 require 'colorize'
 require 'rainbow'
+require 'ascii'
+require 'artii'
 
 require_relative '../lib/bootcamp_app/version'
 require_relative '../lib/bootcamp_app/cli'

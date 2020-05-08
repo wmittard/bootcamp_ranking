@@ -9,11 +9,10 @@ class BootcampApp::Bootcamp #class responsible for all bootcamps
     @@all = []
 
     #attributes assigned upon initialization
-    def initialize(name,locations,overall_rating,url_link,info)
+    def initialize(name,locations,overall_rating,url_link)
         @name = name
         @locations = locations
         @overall_rating = overall_rating
-        @info = info
         @url_link = url_link
         @@all << self
     end

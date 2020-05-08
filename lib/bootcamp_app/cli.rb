@@ -2,21 +2,36 @@ require 'colorize'
 
 class BootcampApp::CLI  #class reponsible for running app logic
 
+
     def run
         BootcampApp::Scraper.scrape
+        scraping
+        more_info
         welcome
         list_bootcamps
         menu
+
     end
+
+
+    def scraping
+        system "clear"
+        puts ""
+        puts "list"
+        puts "We are about to Scrape......This can take a minute"
+        puts ""
+        puts "Get ready for the Top 60 Best Coding Bootcamp!!"
+    end
+
 
     def welcome
         system "clear"
-        puts
         puts "                            THE ".light_blue.bold
         puts "                      CODING BOOTCAMP ".bold
         puts "                            APP ".blue.bold
         puts ""
-
+        puts ""
+        puts ""
         puts " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<".blue.bold
         puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
@@ -27,12 +42,17 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts ""
     end
 
+
+
     def list_bootcamps
         input = gets.strip
+
+
         if input == "list"
             puts ""
             bootcamps = BootcampApp::Bootcamp.all
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
+
 
         elsif input == "exit"
             system "clear"
@@ -47,11 +67,24 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
         else
             puts ""
-            puts "Check out a Bootcamp or insert exit to leave.".bold
-            puts "To see a current list of Bootcamps, insert list."
+            puts "ERROR: Please insert a valid command"
             list_bootcamps
         end
     end
+
+    def more_info
+        @bootcamp = BootcampApp::Bootcamp.all
+        @bootcamp.each do |bootcamp|
+            BootcampApp::Scraper.scrape_two(bootcamp)
+        end
+
+    end
+
+    # def menu_two
+
+    # end
+
+
 
     def menu
         puts ""
@@ -62,6 +95,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts "-------------------------------------------------------------------".blue.bold
         puts ""
         input = gets.strip
+
 
         if input.to_i > 0
             bootcamp_choice = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
@@ -74,13 +108,8 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts "Bootcamp Locations: ".blue.bold + bootcamp_choice.locations
             puts "Rating Out of 5: ".blue.bold + bootcamp_choice.overall_rating
             puts ""
-            puts "About The Bootcamp: ".blue.bold + bootcamp_choice.info
-            puts ""
-            puts "If you still want more..... Check out the link below for more information on YOUR Bootcamp!".blue.bold
-            puts "------------------------------------------------------------------".blue
-            puts "https://www.coursereport.com/#{bootcamp_choice.url_link}"
-            puts ""
-            menu
+            puts "Do you want to learn more about #{bootcamp_choice.name}? Insert 'yes' "
+            menu_two
 
 
         elsif
@@ -90,7 +119,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
             menu
 
-        elsif input == "exit"
+        else input == "exit"
             system "clear"
             puts ""
             puts "------------------------------GOODBYE!-------------------------------".blue.bold
@@ -101,4 +130,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
             exit
         end
     end
+
+
 end
