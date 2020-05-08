@@ -10,15 +10,19 @@ class BootcampApp::CLI  #class reponsible for running app logic
     end
 
     def welcome
+        puts
+        puts "                            THE ".light_blue.bold
+        puts "                      CODING BOOTCAMP ".bold
+        puts "                            APP ".blue.bold
         puts ""
-        puts "                                                       ".blue.bold
+
         puts " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<".blue.bold
-        puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".blue.bold
+        puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
         puts ""
-        puts "------------------------------MENU--------------------------------".blue.bold
-        puts "To see a current list of the Top 60 Best Coding Bootcamps, type list!".bold
-        puts "To leave, type exit."
+        puts "----------------------------MENU--------------------------".blue.bold
+        puts "  View Rankings Insert: 'list'    To Exit Insert: 'exit' "
+        puts "----------------------------------------------------------"
         puts ""
     end
 
@@ -33,8 +37,8 @@ class BootcampApp::CLI  #class reponsible for running app logic
             exit
         else
             puts ""
-            puts "Check out a Bootcamp or type exit to leave.".bold
-            puts "To see a current list of Bootcamps, type list."
+            puts "Check out a Bootcamp or insert exit to leave.".bold
+            puts "To see a current list of Bootcamps, insert list."
             list_bootcamps
         end
     end
@@ -42,8 +46,9 @@ class BootcampApp::CLI  #class reponsible for running app logic
     def menu
         puts ""
         puts "------------------------------MENU--------------------------------".blue.bold
-        puts "Select another Bootcamp you wish to learn more about!".blue.bold
-        puts "To leave, type exit"
+        puts "Insert the number of the Bootcamp you want to learn more about!".bold
+        puts "To leave, insert 'exit' ".bold
+        puts "To return to the Rankings insert 'list'".bold
         puts ""
         input = gets.strip
 
@@ -53,14 +58,15 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts "------------------------------------------------------------------"
             puts "Choose YOUR Coding Bootcamp!".bold.blue
             puts ""
-            puts "Bootcamp Name: ".bold + bootcamp_choice.name
-            puts "Bootcamp Locations: ".bold + bootcamp_choice.locations
-            puts "Rating Out of 5: ".bold + bootcamp_choice.overall_rating
+            puts "Bootcamp Name: ".blue.bold + bootcamp_choice.name
+            puts "Bootcamp Locations: ".blue.bold + bootcamp_choice.locations
+            puts "Rating Out of 5: ".blue.bold + bootcamp_choice.overall_rating
             puts ""
-            puts "About The Bootcamp: ".bold + bootcamp_choice.info
+            puts "About The Bootcamp: ".blue.bold + bootcamp_choice.info
             puts ""
-            puts "Want to learn more? Check out the link below for more information on YOUR Bootcamp!".bold
-            puts "#{bootcamp_choice.url_link}"
+            puts "Want to learn more? Check out the link below for more information on YOUR Bootcamp!".blue.bold
+            puts "------------------------------------------------------------------".blue
+            puts "https://www.coursereport.com/#{bootcamp_choice.url_link}"
             menu
         elsif
             input == "exit"
@@ -71,7 +77,12 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts ""
             puts ""
         else
-            puts "ERROR: Please type a number to see another Bootcamp or type 'exit' to leave"
+            input == "list"
+            puts ""
+            bootcamps = BootcampApp::Bootcamp.all
+            bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
+            puts ""
+            puts "You have returned to the Rankings!"
             menu
         end
     end
