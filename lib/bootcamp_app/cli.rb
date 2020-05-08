@@ -10,6 +10,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
     end
 
     def welcome
+        system "clear"
         puts
         puts "                            THE ".light_blue.bold
         puts "                      CODING BOOTCAMP ".bold
@@ -32,9 +33,18 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts ""
             bootcamps = BootcampApp::Bootcamp.all
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
+
         elsif input == "exit"
-            #system "clear" or system "cls"
+            system "clear"
+            puts ""
+            puts "------------------------------GOODBYE!-------------------------------".blue.bold
+            puts ""
+            puts "Thank you for choosing the Course Report Bootcamp App!!".bold
+            puts ""
+            puts ""
             exit
+
+
         else
             puts ""
             puts "Check out a Bootcamp or insert exit to leave.".bold
@@ -45,15 +55,17 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
     def menu
         puts ""
-        puts "------------------------------MENU--------------------------------".blue.bold
-        puts "Insert the number of the Bootcamp you want to learn more about!".bold
-        puts "To leave, insert 'exit' ".bold
-        puts "To return to the Rankings insert 'list'".bold
+        puts "------------------------------MENU---------------------------------".blue.bold
+        puts "| Insert the number of the Bootcamp you want to learn more about!  |".bold
+        puts "| To leave, insert 'exit'                                          |".bold
+        puts "| To return to the Rankings, insert 'list'                         |".bold
+        puts "-------------------------------------------------------------------".blue.bold
         puts ""
         input = gets.strip
 
         if input.to_i > 0
             bootcamp_choice = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
+            system "clear"
             puts ""
             puts "------------------------------------------------------------------"
             puts "Choose YOUR Coding Bootcamp!".bold.blue
@@ -64,26 +76,29 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts ""
             puts "About The Bootcamp: ".blue.bold + bootcamp_choice.info
             puts ""
-            puts "Want to learn more? Check out the link below for more information on YOUR Bootcamp!".blue.bold
+            puts "If you still want more..... Check out the link below for more information on YOUR Bootcamp!".blue.bold
             puts "------------------------------------------------------------------".blue
             puts "https://www.coursereport.com/#{bootcamp_choice.url_link}"
+            puts ""
             menu
+
+
         elsif
-            input == "exit"
+            input == "list"
+            puts ""
+            bootcamps = BootcampApp::Bootcamp.all
+            bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
+            menu
+
+        elsif input == "exit"
+            system "clear"
             puts ""
             puts "------------------------------GOODBYE!-------------------------------".blue.bold
             puts ""
             puts "Thank you for choosing the Course Report Bootcamp App!!".bold
             puts ""
             puts ""
-        else
-            input == "list"
-            puts ""
-            bootcamps = BootcampApp::Bootcamp.all
-            bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
-            puts ""
-            puts "You have returned to the Rankings!"
-            menu
+            exit
         end
     end
 end

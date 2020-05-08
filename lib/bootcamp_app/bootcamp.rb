@@ -4,12 +4,12 @@ class BootcampApp::Bootcamp #class responsible for all bootcamps
 
    #class variable to store all new instances
 
-    attr_accessor :name, :locations, :overall_rating, :info, :url_link
+    attr_accessor :name, :locations, :overall_rating, :url_link, :info
 
     @@all = []
 
     #attributes assigned upon initialization
-    def initialize(name,locations,overall_rating,info,url_link)
+    def initialize(name,locations,overall_rating,url_link,info)
         @name = name
         @locations = locations
         @overall_rating = overall_rating
