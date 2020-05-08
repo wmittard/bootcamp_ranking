@@ -67,8 +67,8 @@ class BootcampApp::CLI  #class reponsible for running app logic
             bootcamp_choice = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
             system "clear"
             puts ""
-            puts "------------------------------------------------------------------"
-            puts "Choose YOUR Coding Bootcamp!".bold.blue
+            puts "------------------------------------------------------------------".blue
+            puts "Thanks for choosing #{bootcamp_choice.name.gsub(/(?<=[A-Za-z])(?=[A-Z])/, ' ')}!".bold
             puts ""
             puts "Bootcamp Name: ".blue.bold + bootcamp_choice.name
             puts "Bootcamp Locations: ".blue.bold + bootcamp_choice.locations
