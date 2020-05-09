@@ -1,9 +1,8 @@
-require 'colorize'
+
 
 class BootcampApp::CLI  #class reponsible for running app logic
- attr_accessor :username
 
-
+    attr_accessor :username
 
     def run
         welcome
@@ -32,9 +31,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts ""
         puts "Lets get you your Top 60 Best Coding Bootcamps!".bold
         sleep(3)
-
-     end
-
+    end
 
     def scraping
         system "clear"
@@ -73,12 +70,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
             `---._.-------------------------------------------------------------._.---'  ".blue.bold
 
         sleep(10)
-
-
     end
-
-
-
 
     def home_page
         system "clear"
@@ -103,15 +95,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
                       _)   (   {-__}|         ||
                      /______\ |_,__)          ||".bold
 
-
-
-
-
-
-
-
-
-
         puts " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<".blue.bold
         puts " |      THE Course Report Best Coding Bootcamps App!      |".bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
@@ -127,12 +110,10 @@ class BootcampApp::CLI  #class reponsible for running app logic
     def list_bootcamps
         input = gets.strip
 
-
         if input == "list"
             puts ""
             bootcamps = BootcampApp::Bootcamp.all
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
-
 
         elsif input == "exit"
             system "clear"
@@ -143,7 +124,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts ""
             puts ""
             exit
-
 
         else
             puts ""
@@ -169,7 +149,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts ""
         input = gets.strip
 
-
         if input.to_i > 0
             bootcamp_choice = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
             system "clear"
@@ -189,7 +168,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts "Want More? Check Out The Link Below: ".blue.bold
             puts "https://www.coursereport.com/" + bootcamp_choice.url_link
             menu
-
 
         elsif input == "list"
             puts ""
