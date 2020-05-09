@@ -1,16 +1,39 @@
 require 'colorize'
 
 class BootcampApp::CLI  #class reponsible for running app logic
+ attr_accessor :username
+
 
 
     def run
+        welcome
+        get_name
         BootcampApp::Scraper.scrape
         scraping
         # more_info
-        welcome
+        home_page
         list_bootcamps
         menu
     end
+
+    def welcome
+        system "clear"
+        puts ""
+        puts ""
+        puts "Welcome! Whats your name?"
+        puts ""
+    end
+
+    def get_name
+        name = gets.strip
+        self.username = name
+        puts ""
+        puts "Nice to meet you #{self.username}!"
+        puts ""
+        puts "Lets get you your Top 60 Best Coding Bootcamps!".bold
+        sleep(3)
+
+     end
 
 
     def scraping
@@ -22,7 +45,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
 
                           -------------------------------------------------- \                                           \
-                         |     _________________________________________    |
+                            |     _________________________________________    |
                          |   |                                         |    |
                          |   |  WELCOME TO THE CODING BOOTCAMP APP     |    |
                          |   |                                         |    |
@@ -52,20 +75,12 @@ class BootcampApp::CLI  #class reponsible for running app logic
         sleep(10)
 
 
-
-
-
-
-
-
-
-
     end
 
 
 
 
-    def welcome
+    def home_page
         system "clear"
         puts "                            THE ".light_blue.bold
         puts "                      CODING BOOTCAMP ".bold
@@ -98,7 +113,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
 
         puts " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<".blue.bold
-        puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".bold
+        puts " |      THE Course Report Best Coding Bootcamps App!      |".bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
         puts ""
         puts "----------------------------MENU--------------------------".blue.bold
