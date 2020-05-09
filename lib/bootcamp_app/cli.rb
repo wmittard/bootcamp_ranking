@@ -6,22 +6,63 @@ class BootcampApp::CLI  #class reponsible for running app logic
     def run
         BootcampApp::Scraper.scrape
         scraping
-        more_info
+        # more_info
         welcome
         list_bootcamps
         menu
-
     end
 
 
     def scraping
         system "clear"
+        puts " "
         puts ""
-        puts "list"
-        puts "We are about to Scrape......This can take a minute"
-        puts ""
-        puts "Get ready for the Top 60 Best Coding Bootcamp!!"
+        puts "
+
+
+
+                          -------------------------------------------------- \                                           \
+                                  |     _________________________________________    |
+                         |   |                                         |    |
+                         |   |  WELCOME TO THE CODING BOOTCAMP APP     |    |
+                         |   |                                         |    |
+                         |   |  WE ARE SCRAPING.....                   |    |
+                         |   |       THIS MAY TAKE A MINUTE            |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |                                         |    |
+                         |   |_________________________________________|    |
+                         |                                                  |
+                         |\ _________________________________________________|
+                                \___________________________________
+                            ___________________________________________
+                         _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_
+                       _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_
+                   _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_
+                _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_
+             _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_
+            :-------------------------------------------------------------------------:
+            `---._.-------------------------------------------------------------._.---'  ".blue.bold
+
+        sleep(10)
+
+
+
+
+
+
+
+
+
+
     end
+
+
 
 
     def welcome
@@ -30,8 +71,32 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts "                      CODING BOOTCAMP ".bold
         puts "                            APP ".blue.bold
         puts ""
-        puts ""
-        puts ""
+        puts "
+
+
+                          ___
+                        /` ,-\      _ ___
+                        |_c  '>    |-|   |._
+                         )_ _/     | |   |  |
+                [___]    /  `\____  | |   |_,'
+                |  ^|  /  \_____/)  |-|___|
+                |   | /    /   _:::_))_(___
+                |   |/`-._/_   |___________|
+                `-;_|\_____ `\   ||"""""""""||"
+                 | '######|_|_||         ||'
+                  \ ._  _,'{~-_}|         ||
+                      _)   (   {-__}|         ||
+                     /______\ |_,__)          ||".bold
+
+
+
+
+
+
+
+
+
+
         puts " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<".blue.bold
         puts " | Weclome To THE Course Report Best Coding Bootcamps App!|".bold
         puts " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".blue.bold
@@ -72,19 +137,12 @@ class BootcampApp::CLI  #class reponsible for running app logic
         end
     end
 
-    def more_info
-        @bootcamp = BootcampApp::Bootcamp.all
-        @bootcamp.each do |bootcamp|
-            BootcampApp::Scraper.scrape_two(bootcamp)
-        end
-
-    end
-
-    # def menu_two
-
+    # def more_info
+    #     @bootcamp = BootcampApp::Bootcamp.all
+    #     @bootcamp.each do |bootcamp|
+    #         BootcampApp::Scraper.scrape_two(bootcamp)
+    #     end
     # end
-
-
 
     def menu
         puts ""
@@ -108,12 +166,17 @@ class BootcampApp::CLI  #class reponsible for running app logic
             puts "Bootcamp Locations: ".blue.bold + bootcamp_choice.locations
             puts "Rating Out of 5: ".blue.bold + bootcamp_choice.overall_rating
             puts ""
-            puts "Do you want to learn more about #{bootcamp_choice.name}? Insert 'yes' "
-            menu_two
+            puts "About The Bootcamp: ".blue.bold + bootcamp_choice.about
+            puts ""
+            # puts "Most Recent Review: ".blue.bold + bootcamp_choice.review
+            # puts ""
+            puts ""
+            puts "Want More? Check Out The Link Below: ".blue.bold
+            puts "https://www.coursereport.com/" + bootcamp_choice.url_link
+            menu
 
 
-        elsif
-            input == "list"
+        elsif input == "list"
             puts ""
             bootcamps = BootcampApp::Bootcamp.all
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
@@ -130,6 +193,4 @@ class BootcampApp::CLI  #class reponsible for running app logic
             exit
         end
     end
-
-
 end
