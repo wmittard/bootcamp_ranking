@@ -22,7 +22,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
 
                           -------------------------------------------------- \                                           \
-                                  |     _________________________________________    |
+                         |     _________________________________________    |
                          |   |                                         |    |
                          |   |  WELCOME TO THE CODING BOOTCAMP APP     |    |
                          |   |                                         |    |
