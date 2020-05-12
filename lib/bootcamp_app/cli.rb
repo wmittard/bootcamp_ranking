@@ -9,7 +9,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
         get_name
         BootcampApp::Scraper.scrape
         scraping
-        # more_info
         home_page
         list_bootcamps
         menu
@@ -30,7 +29,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts "Nice to meet you #{self.username}!"
         puts ""
         puts "Lets get you your Top 60 Best Coding Bootcamps!".bold
-        sleep(3)
+        sleep(1.5)
     end
 
     def scraping
@@ -42,7 +41,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
 
 
                           -------------------------------------------------- \                                           \
-                            |     _________________________________________    |
+                                      |     _________________________________________    |
                          |   |                                         |    |
                          |   |  WELCOME TO THE CODING BOOTCAMP APP     |    |
                          |   |                                         |    |
@@ -69,7 +68,7 @@ class BootcampApp::CLI  #class reponsible for running app logic
             :-------------------------------------------------------------------------:
             `---._.-------------------------------------------------------------._.---'  ".blue.bold
 
-        sleep(10)
+    sleep(6)
     end
 
     def home_page
@@ -132,12 +131,6 @@ class BootcampApp::CLI  #class reponsible for running app logic
         end
     end
 
-    # def more_info
-    #     @bootcamp = BootcampApp::Bootcamp.all
-    #     @bootcamp.each do |bootcamp|
-    #         BootcampApp::Scraper.scrape_two(bootcamp)
-    #     end
-    # end
 
     def menu
         puts ""
@@ -149,31 +142,36 @@ class BootcampApp::CLI  #class reponsible for running app logic
         puts ""
         input = gets.strip
 
+
         if input.to_i > 0
-            bootcamp_choice = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
+            bootcamp = BootcampApp::Bootcamp.find_by_index(input.to_i - 1)
+            puts BootcampApp::Scraper.scrape_two(bootcamp)
             system "clear"
             puts ""
             puts "------------------------------------------------------------------".blue
-            puts "Thanks for choosing #{bootcamp_choice.name.gsub(/(?<=[A-Za-z])(?=[A-Z])/, ' ')}!".bold
+            puts "Thanks for choosing #{bootcamp.name.gsub(/(?<=[A-Za-z])(?=[A-Z])/, ' ')}!".bold
             puts ""
-            puts "Bootcamp Name: ".blue.bold + bootcamp_choice.name
-            puts "Bootcamp Locations: ".blue.bold + bootcamp_choice.locations
-            puts "Rating Out of 5: ".blue.bold + bootcamp_choice.overall_rating
+            puts "Bootcamp Name: ".blue.bold + bootcamp.name
+            puts "Bootcamp Locations: ".blue.bold + bootcamp.locations
+            puts "Rating Out of 5: ".blue.bold + bootcamp.overall_rating
             puts ""
-            puts "About The Bootcamp: ".blue.bold + bootcamp_choice.about
+            puts "About The Bootcamp: ".blue.bold + bootcamp.info
             puts ""
-            # puts "Most Recent Review: ".blue.bold + bootcamp_choice.review
-            # puts ""
+            puts "Most Recent Review: ".blue.bold + bootcamp.review
+            puts ""
             puts ""
             puts "Want More? Check Out The Link Below: ".blue.bold
-            puts "https://www.coursereport.com/" + bootcamp_choice.url_link
+            puts "https://www.coursereport.com/" + bootcamp.url_link
             menu
 
+
         elsif input == "list"
+            input = gets.strip
             puts ""
             bootcamps = BootcampApp::Bootcamp.all
             bootcamps.each.with_index(1) {|bootcamp, index| puts "#{index}. #{bootcamp.name}"}
             menu
+
 
         else input == "exit"
             system "clear"

@@ -2,17 +2,16 @@ require 'pry'
 
 class BootcampApp::Bootcamp #class responsible for all bootcamps
 
-    attr_accessor :name, :locations, :overall_rating, :url_link, :about #:review
+    attr_accessor :name, :locations, :overall_rating, :url_link, :info, :review
 
     @@all = []
 
     #attributes assigned upon initialization
-    def initialize(name,locations,overall_rating,url_link,about)
+    def initialize(name,locations,overall_rating,url_link)
         @name = name
         @locations = locations
         @overall_rating = overall_rating
         @url_link = url_link
-        @about = about
         @@all << self
     end
 
