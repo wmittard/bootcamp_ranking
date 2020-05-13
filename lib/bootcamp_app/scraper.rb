@@ -2,7 +2,7 @@ require 'pry'
 class BootcampApp::Scraper #class responsible for all scraping logic
 
     def self.scrape
-        doc = Nokogiri::HTML(open("https://www.coursereport.com/best-coding-bootcamps"))
+        doc = Nokogiri::HTML(open("https://www.coursereport.com/best-coding-bootcamps")) 
         doc.css("div.info-container").each do |bootcamp|
             name = bootcamp.css("h3").children[0].text.gsub(/\d+/,"").delete(" . ").gsub(/(?<=[A-Za-z])(?=[A-Z])/, ' ')
             locations = bootcamp.css(".location").text
